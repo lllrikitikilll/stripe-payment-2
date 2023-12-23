@@ -8,10 +8,14 @@ class Item(models.Model):
     description = models.TextField()
     price = models.IntegerField()
 
+    def __str__(self):
+        return f'{self.name:.7} {self.price}'
+
 
 class Order(models.Model):
-    order_id = models.IntegerField()
+    order_id = models.IntegerField(unique=True)
     items = models.ManyToManyField(Item)
+
 
 
 

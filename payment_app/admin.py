@@ -6,13 +6,18 @@ from payment_app.models import Item, Order
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = ['name', 'price']
+
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['order_id', 'order_count', 'order_sum']
+    list_display_links = ['order_id', 'order_sum']
 
-    def order_count(self, obj):
+    @staticmethod
+    def order_count(obj):
         return obj.items.count()
 
-    def order_sum(self, obj):
+    @staticmethod
+    def order_sum(obj):
         return obj.items.aggregate(res=Sum("price"))['res']
 

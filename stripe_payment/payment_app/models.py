@@ -8,3 +8,4 @@ class Item(models.Model):
 
 
 class Order(models.Model):
+    items = models.ManyToManyField(Item)

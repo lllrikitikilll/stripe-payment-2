@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.db.models import Sum
 
-from payment_app.models import Item, Order
+from payment_app.models import Item, Order, Discount
+
+
 # Register your models here.
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
@@ -21,3 +23,7 @@ class OrderAdmin(admin.ModelAdmin):
     def order_sum(obj):
         return obj.items.aggregate(res=Sum("price"))['res']
 
+
+@admin.register(Discount)
+class DiscountAdmin(admin.ModelAdmin):
+    list_display = ('title', 'percent_dis')
